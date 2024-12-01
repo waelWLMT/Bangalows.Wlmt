@@ -24,11 +24,11 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        public List<UserReadDto> GetALLPatientAccount()
+        public List<UserReadDto> GetALLCommercial()
         {
-            var accounts = _userService.GetBy(x=> x.RoleId == (int) UserRole.Patient, x=> x.Role);
+            var commercials = _userService.GetBy(x=> x.RoleId == (int) UserRole.Commercial, x=> x.Role);
 
-            var result = _mapper.Map<List<UserReadDto>>(accounts);
+            var result = _mapper.Map<List<UserReadDto>>(commercials);
 
             return result;
         }

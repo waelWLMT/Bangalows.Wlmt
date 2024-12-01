@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Core.Enums
 {
+    /// <summary>
+    /// The users roles.
+    /// </summary>
     public enum UserRole
     {
         Admin = 1,
-        Praticien = 2,
-        Patient = 3
+        Client = 2,
+        Commercial = 3,
+        Proprietaire = 4
     }
 }

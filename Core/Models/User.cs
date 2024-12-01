@@ -25,7 +25,7 @@ namespace Core.Models
         /// <summary>
         /// Gets or sets the login.
         /// </summary>
-        public string  Login { get; set; }
+        public string Login { get; set; }
         /// <summary>
         /// Gets or sets the email.
         /// </summary>
@@ -51,6 +51,11 @@ namespace Core.Models
         /// Gets or sets the role.
         /// </summary>
         public virtual Role Role { get; set; }
+
+        ///// <summary>
+        ///// Gets or sets the reservations.
+        ///// </summary>
+        //public virtual List<Reservation> Reservations { get; set; }
 
         #endregion
 

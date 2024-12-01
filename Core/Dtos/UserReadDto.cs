@@ -37,7 +37,7 @@ namespace Core.Dtos
         /// <summary>
         /// Gets or sets the role.
         /// </summary>
-        public virtual Role Role { get; set; }
+        public virtual RoleReadDto Role { get; set; }
 
         #endregion
 

@@ -42,11 +42,15 @@ namespace Root
 
             #region // Repositories injection
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ICommoditeRepository, CommoditeRepository>();
             #endregion
 
             #region // Services injection
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ICommoditeService, CommoditeService>();
 
             #endregion
 

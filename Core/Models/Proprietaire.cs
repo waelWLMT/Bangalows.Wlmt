@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Core.Models
 {
     /// <summary>
-    /// The client.
+    /// The proprietaire.
     /// </summary>
-    public class Client : User
+    public class Proprietaire : User
     {
-        #region Properties
+        #region properties
         /// <summary>
         /// Gets or sets the nom.
         /// </summary>
@@ -21,28 +21,25 @@ namespace Core.Models
         /// </summary>
         public string Prenom { get; set; }
         /// <summary>
-        /// Gets or sets the CIN.
+        /// Gets or sets the tel1.
         /// </summary>
-        public string CIN { get; set; }
+        public string Tel1 { get; set; }
         /// <summary>
-        /// Gets or sets the tel.
+        /// Gets or sets the tel2.
         /// </summary>
-        public string Tel { get; set; }
-        /// <summary>
-        /// Gets or sets the adresse mail.
-        /// </summary>
-        public string AdresseMail { get; set;}
-       
+        public string Tel2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the numero whats app.
+        /// </summary>
+        public string NumeroWhatsApp { get; set; }
         #endregion
 
-        #region Navigation properties
+        #region navigation properties
         /// <summary>
-        /// Gets or sets the reservations.
+        /// Gets or sets the bangalows.
         /// </summary>
-        public virtual List<Reservation> Reservations { get; set; }
-        public virtual List<Photo> CINPhotos { get; set; }
+        public virtual  List<Bangalow> Bangalows { get; set; }
         #endregion
-
     }
 }
