@@ -9,42 +9,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApi.Controllers;
+using WebApi.Profiles;
 
 namespace GestionBangalow.Tests.WebApi.Tests
 {
     public class DonneesDeReferencesControllerTest
     {
+        private readonly Mock<IRoleService> _moqRoleService;
+        private readonly Mock<ICommoditeService> _moqCommoditeService;
+        public DonneesDeReferencesControllerTest()
+        {
 
-        public DonneesDeReferencesControllerTest()   {  }
-
-
-
+            _moqRoleService = new Mock<IRoleService>();
+            _moqCommoditeService = new Mock<ICommoditeService>();
+        }
 
         [Fact]
-        public void GetAllRoles_shouldReturnNotEmptyList()
+        public void GetAllRoles_shouldReturnNotNullOrEmptyList()
         {
-            var moqRoleService = new Mock<IRoleService>();
-            var moqCommoditeService = new Mock<ICommoditeService>();
-            var moqMapper = new Mock<IMapper>();
 
-            moqRoleService.Setup(x => x.GetAll()).Returns(GetListOfRoles());
-            moqMapper.Setup(x => x.Map<List<RoleReadDto>>(GetListOfRoles())).Returns(GetListOfRolesReadDto());
+            //Arrange
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new RoleProfile());
+            });
 
-            var controller = new DonneesDeReferencesController(moqRoleService.Object, moqCommoditeService.Object, moqMapper.Object);
+            var mapper = mapperConfig.CreateMapper();
 
-            var expectedNumberOfRoles = 4;
-            var actual = controller.GetAllRoles();
+            _moqRoleService.Setup(x => x.GetAll()).Returns(getListOfRoles());
 
-            Assert.NotNull(actual);
-            Assert.NotEmpty(actual);
-            Assert.Equal(expectedNumberOfRoles, actual.Count());           
+            var controller = new DonneesDeReferencesController(_moqRoleService.Object, _moqCommoditeService.Object, mapper);
+
+            // Act
+            var actualResult = controller.GetAllRoles();
+            var expectedResult = getListOfRolesReadDto();
+
+            // Assert
+            Assert.True(actualResult.Any());
+            Assert.Equal(expectedResult.Count(), actualResult.Count());
 
         }
 
+        [Fact]
+        void GetAllCommodite_shouldReturnNullOrEmptyList()
+        {
+            // Arrange
+            var moqConfig = new MapperConfiguration(cfg => { cfg.AddProfile(new CommoditeProfile()); });
+            var mapper = moqConfig.CreateMapper();
 
-        #region usefull private methode for mocking data
+            _moqCommoditeService.Setup(x => x.GetAll()).Returns(getListOfCommodite());
 
-        private List<RoleReadDto> GetListOfRolesReadDto()
+            var controller = new DonneesDeReferencesController(_moqRoleService.Object, _moqCommoditeService.Object, mapper);
+            
+            // Act
+            var actualResult = controller.GetAllCommodites();
+            var expectedResult = getListOfCommoditeReadDto();
+            
+            // Assert
+            Assert.NotNull(actualResult);
+            Assert.NotEmpty(actualResult);
+            Assert.Equal(actualResult.Count(), actualResult.Count());
+
+        }
+
+        #region Usefull private methode for mocking data
+
+        private List<RoleReadDto> getListOfRolesReadDto()
         {
             return new List<RoleReadDto> {
                 new RoleReadDto {Id = 1, Libelle = "Admin" } ,
@@ -54,13 +84,32 @@ namespace GestionBangalow.Tests.WebApi.Tests
             };
         }
 
-        private List<Role> GetListOfRoles()
+        private List<Role> getListOfRoles()
         {
             return new List<Role> {
                 new Role {Id = 1, Libelle = "Admin" } ,
                 new Role {Id = 2, Libelle = "Client" },
                 new Role { Id = 3, Libelle = "Commercial"},
                 new Role {Id = 4, Libelle = "Proprietaire" }
+            };
+        }
+
+
+        private List<Comodite> getListOfCommodite()
+        {
+            return new List<Comodite> {
+                new Comodite { Id = 1, Libelle = "Jardin" },
+                new Comodite { Id = 2, Libelle = "Place parcking" },
+                new Comodite { Id = 3, Libelle = "Vue en Mer" }
+            };
+        }
+
+        private List<CommoditeReadDto> getListOfCommoditeReadDto()
+        {
+            return new List<CommoditeReadDto> {
+                new CommoditeReadDto { Id = 1, Libelle = "Jardin" },
+                new CommoditeReadDto { Id = 2, Libelle = "Place parcking" },
+                new CommoditeReadDto { Id = 3, Libelle = "Vue en Mer" }
             };
         }
 
