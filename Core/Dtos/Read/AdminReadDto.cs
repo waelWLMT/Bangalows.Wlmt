@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Core.Dtos.Read
 {
     /// <summary>
-    /// The user account.
+    /// The admin read data transfer object.
     /// </summary>
-    public class User : Entity
+    public class AdminReadDto : UserReadDto
     {
-        #region properties
-       
-        public string Nom { get; set; }        
-        public string Prenom { get; set; }
-        public string Tel { get; set; }
+        #region Properties
 
         /// <summary>
         /// Gets or sets the user name.
         /// </summary>
         public string UserName { get; set; }
+
         /// <summary>
         /// Gets or sets the crypted password.
         /// </summary>
         public string CryptedPassword { get; set; }
+
         /// <summary>
         /// Gets or sets the login.
         /// </summary>
         public string Login { get; set; }
+
         /// <summary>
         /// Gets or sets the email.
         /// </summary>
@@ -48,15 +45,12 @@ namespace Core.Models
         /// <summary>
         /// Gets or sets the role id.
         /// </summary>
-        [ForeignKey(nameof(Role))]
         public int RoleId { get; set; }
 
         /// <summary>
         /// Gets or sets the role.
         /// </summary>
-        public virtual Role Role { get; set; }        
-
+        public RoleReadDto Role { get; set; }
         #endregion
-
     }
 }

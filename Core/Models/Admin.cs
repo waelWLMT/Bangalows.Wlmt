@@ -13,18 +13,7 @@ namespace Core.Models
     public class Admin : User
     {
         #region properties
-        /// <summary>
-        /// Gets or sets the nom.
-        /// </summary>
-        public string Nom { get; set; }
-        /// <summary>
-        /// Gets or sets the prenom.
-        /// </summary>
-        public string Prenom { get; set; }
-        /// <summary>
-        /// Gets or sets the tel1.
-        /// </summary>
-        public string Tel1 { get; set; }
+       
         /// <summary>
         /// Gets or sets the tel2.
         /// </summary>

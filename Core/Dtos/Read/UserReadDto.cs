@@ -1,32 +1,21 @@
-﻿using System;
+﻿using Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Core.Dtos.Read
 {
-    /// <summary>
-    /// The user account.
-    /// </summary>
-    public class User : Entity
+    public class UserReadDto
     {
-        #region properties
-       
-        public string Nom { get; set; }        
-        public string Prenom { get; set; }
-        public string Tel { get; set; }
 
+        #region properties
         /// <summary>
         /// Gets or sets the user name.
         /// </summary>
         public string UserName { get; set; }
-        /// <summary>
-        /// Gets or sets the crypted password.
-        /// </summary>
-        public string CryptedPassword { get; set; }
         /// <summary>
         /// Gets or sets the login.
         /// </summary>
@@ -35,15 +24,9 @@ namespace Core.Models
         /// Gets or sets the email.
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Gets or sets  a value indicating whether to est active.
-        /// </summary>
-        public bool EstActive { get; set; }
-
         #endregion
 
-        #region Navigation properties
+        #region navigation properties
 
         /// <summary>
         /// Gets or sets the role id.
@@ -54,7 +37,7 @@ namespace Core.Models
         /// <summary>
         /// Gets or sets the role.
         /// </summary>
-        public virtual Role Role { get; set; }        
+        public virtual RoleReadDto Role { get; set; }
 
         #endregion
 

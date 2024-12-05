@@ -24,6 +24,9 @@ namespace GestionBangalow.Tests.WebApi.Tests
             _moqCommoditeService = new Mock<ICommoditeService>();
         }
 
+
+        #region test methodes
+
         [Fact]
         public void GetAllRoles_shouldReturnNotNullOrEmptyList()
         {
@@ -71,6 +74,8 @@ namespace GestionBangalow.Tests.WebApi.Tests
             Assert.Equal(actualResult.Count(), actualResult.Count());
 
         }
+
+        #endregion
 
         #region Usefull private methode for mocking data
 
